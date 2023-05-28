@@ -11,14 +11,37 @@ import {
   CLEAR_FILTERS,
 } from '../actions'
 import { useProductsContext } from './products_context'
+import { type } from '@testing-library/user-event/dist/type'
 
-const initialState = {}
+const initialState = {
+  filtered_products: [],
+  all_products: [],
+  grid_view: true
+}
 
 const FilterContext = React.createContext()
 
 export const FilterProvider = ({ children }) => {
+  const { products } = useProductsContext();
+  const [state, dispatch] = useReducer(reducer, initialState)
+
+  // console.log(state)
+
+  useEffect(() => {
+    dispatch({
+      type: LOAD_PRODUCTS, payload: products
+    })
+  },[products])
+
+   const setGridView = () => {
+		dispatch({ type: SET_GRIDVIEW });
+   };
+   const setListView = () => {
+		dispatch({ type: SET_LISTVIEW });
+   };
+  
   return (
-    <FilterContext.Provider value='filter context'>
+    <FilterContext.Provider value={{...state, setGridView, setListView}}>
       {children}
     </FilterContext.Provider>
   )
