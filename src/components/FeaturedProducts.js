@@ -42,6 +42,8 @@ const FeaturedProducts = () => {
 };
 
 const Wrapper = styled.section`
+
+    /* margin-top: 11rem; */
 	background: var(--clr-grey-10);
 	.featured {
 		margin: 4rem auto;
