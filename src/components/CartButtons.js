@@ -7,13 +7,14 @@ import { useCartContext } from '../context/cart_context'
 import { useUserContext } from '../context/user_context'
 
 const CartButtons = () => {
+  const {total_items} = useCartContext()
   const {  closeSidebar } = useProductsContext();
   return <Wrapper className='cart-btn-wrapper'>
 
     <Link to='/cart' className='cart-btn' onClick={closeSidebar}>Cart
       <span className="cart-container">
         <FaShoppingCart />
-        <span className="cart-value">12</span>
+        <span className="cart-value">{total_items }</span>
       </span>
     </Link>
 
